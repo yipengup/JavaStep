@@ -583,10 +583,13 @@ public abstract class AbstractQueuedSynchronizer
     private Node enq(final Node node) {
         for (;;) {
             Node t = tail;
+            // 当 tail节点为null表示双向链表是空的，需要初始化
             if (t == null) { // Must initialize
+                // 将 head、tail节点都指向空节点（哨兵节点）
                 if (compareAndSetHead(new Node()))
                     tail = head;
             } else {
+                // 初始化完毕后才会将要等待的节点加入到队列的尾部
                 node.prev = t;
                 if (compareAndSetTail(t, node)) {
                     t.next = node;
@@ -606,8 +609,10 @@ public abstract class AbstractQueuedSynchronizer
         Node node = new Node(Thread.currentThread(), mode);
         // Try the fast path of enq; backup to full enq on failure
         Node pred = tail;
+        // 如果尾部节点不为空，直接将当前节点插入到队列尾部，并将尾部节点指向当前节点
         if (pred != null) {
             node.prev = pred;
+            // CAS失败的话，通过后面的入队进行补偿操作
             if (compareAndSetTail(pred, node)) {
                 pred.next = node;
                 return node;
@@ -1195,7 +1200,9 @@ public abstract class AbstractQueuedSynchronizer
      *        can represent anything you like.
      */
     public final void acquire(int arg) {
+        // 获取锁失败后将当前线程加入到等待队列
         if (!tryAcquire(arg) &&
+            // addWaiter 负责先将当前线程组装成节点添加到队列的尾部
             acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
             selfInterrupt();
     }
@@ -1720,6 +1727,7 @@ public abstract class AbstractQueuedSynchronizer
         boolean failed = true;
         try {
             int savedState = getState();
+            // 释放同步锁
             if (release(savedState)) {
                 failed = false;
                 return savedState;
@@ -1727,6 +1735,7 @@ public abstract class AbstractQueuedSynchronizer
                 throw new IllegalMonitorStateException();
             }
         } finally {
+            // 失败之后将节点等待状态标记为取消，后续会删除取消状态的节点
             if (failed)
                 node.waitStatus = Node.CANCELLED;
         }
@@ -1848,10 +1857,12 @@ public abstract class AbstractQueuedSynchronizer
         private Node addConditionWaiter() {
             Node t = lastWaiter;
             // If lastWaiter is cancelled, clean out.
+            // 检查队尾中节点的状态，如果已经不是等待状态就移除队列
             if (t != null && t.waitStatus != Node.CONDITION) {
                 unlinkCancelledWaiters();
                 t = lastWaiter;
             }
+            // 将当前线程组装成等待状态的节点加入条件队列
             Node node = new Node(Thread.currentThread(), Node.CONDITION);
             if (t == null)
                 firstWaiter = node;
@@ -2032,7 +2043,9 @@ public abstract class AbstractQueuedSynchronizer
         public final void await() throws InterruptedException {
             if (Thread.interrupted())
                 throw new InterruptedException();
+            // 将当前节点添加到等待队列的队尾
             Node node = addConditionWaiter();
+            // （调用release方法）释放当前获取到的同步锁
             int savedState = fullyRelease(node);
             int interruptMode = 0;
             while (!isOnSyncQueue(node)) {
@@ -2040,6 +2053,7 @@ public abstract class AbstractQueuedSynchronizer
                 if ((interruptMode = checkInterruptWhileWaiting(node)) != 0)
                     break;
             }
+            // 从同步队列中获取节点去获取锁
             if (acquireQueued(node, savedState) && interruptMode != THROW_IE)
                 interruptMode = REINTERRUPT;
             if (node.nextWaiter != null) // clean up if cancelled
