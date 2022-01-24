@@ -27,6 +27,7 @@ public class CustomRejectedExecutionHandler implements RejectedExecutionHandler 
         System.out.println("largestPoolSize = " + largestPoolSize);
 
         // 直接抛弃当前任务
+        System.out.println("===================================");
 
     }
 }

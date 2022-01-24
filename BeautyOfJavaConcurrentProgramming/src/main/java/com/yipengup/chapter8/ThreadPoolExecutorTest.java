@@ -11,7 +11,7 @@ import java.util.concurrent.*;
 public class ThreadPoolExecutorTest {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         printPoolInfoForThreadOverflow();
     }
 
@@ -36,23 +36,31 @@ public class ThreadPoolExecutorTest {
                 linkedBlockingQueue, threadFactory, customRejectedExecutionHandler);
     }
 
-    private static void printPoolInfoForThreadOverflow() {
+    private static void printPoolInfoForThreadOverflow() throws InterruptedException {
         Runnable runnable = () -> {
             Thread thread = Thread.currentThread();
             System.out.println(thread.getName() + " running");
-            while (true) {
-
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+
         };
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 2, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(5),
-                NamedThreadFactory.create("printPoolInfoForThreadOverflow"), new CustomRejectedExecutionHandler());
+        CustomRejectedExecutionHandler handler = new CustomRejectedExecutionHandler();
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 4, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<>(5),
+                NamedThreadFactory.create("printPoolInfoForThreadOverflow"), handler);
 
         // 创建任务, 查看任务溢出后线程池的情况
         for (int i = 0; i < 20; i++) {
+            Thread.sleep(500);
             executor.submit(runnable);
-            System.out.println("===========================");
         }
+
+        // 打印相关信息
+        Thread.sleep(20000);
+        handler.rejectedExecution(null, executor);
     }
 
 
