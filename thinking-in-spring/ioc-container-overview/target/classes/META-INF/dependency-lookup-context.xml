@@ -11,6 +11,7 @@
 
     <!-- 配置 延迟查找 Bean信息 -->
     <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <!-- 这里设置的 value 后续会通过 beanFactory.getBean(targetBeanName) 去获取到实际的 Bean 信息 -->
         <property name="targetBeanName" value="user"/>
     </bean>
 

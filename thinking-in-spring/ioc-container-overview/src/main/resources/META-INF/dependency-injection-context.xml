@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <!-- 引入其他的配置信息 -->
+    <import resource="dependency-lookup-context.xml"/>
+
+    <!-- 手动注入 User Bean 到 UserRepository -->
+    <!-- <bean id="userRepository" class="com.yipeng.ioc.container.overview.repository.UserRepository"> -->
+    <!--     <property name="userCollections"> -->
+    <!--         &lt;!&ndash; 将 user 、superUser 手动注入到 userCollections 中 &ndash;&gt; -->
+    <!--         <util:list> -->
+    <!--             <ref bean="user"/> -->
+    <!--             <ref bean="superUser"/> -->
+    <!--         </util:list> -->
+    <!--     </property> -->
+    <!-- </bean> -->
+
+    <!-- 通过 autowire 属性表明根据属性的类型自动注入相关属性 -->
+    <bean id="userRepository" class="com.yipeng.ioc.container.overview.repository.UserRepository" autowire="byType"/>
+
+</beans>
