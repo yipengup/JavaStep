@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  配置 user bean 信息  -->
+    <bean id="user" class="com.yipeng.ioc.container.overview.domain.User">
+        <property name="id" value="1"/>
+        <property name="name" value="yipeng"/>
+    </bean>
+
+    <!-- 配置 延迟查找 Bean信息 -->
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <!-- 这里设置的 value 后续会通过 beanFactory.getBean(targetBeanName) 去获取到实际的 Bean 信息 -->
+        <property name="targetBeanName" value="user"/>
+    </bean>
+
+    <!-- 配置 SuperUser Bean 信息 -->
+    <!-- 因为 superUser 继承于 User，当通过类型获取单一 Bean 时会报错，所以通过 primary 进行处理 -->
+    <!-- parent 属性标记当前 Bean 继承于 User， 会将 User 的属性信息集成到本 Bean 中 -->
+    <bean id="superUser" class="com.yipeng.ioc.container.overview.domain.SuperUser" primary="true" parent="user">
+        <property name="address" value="Longyang No. 1"/>
+    </bean>
+</beans>
