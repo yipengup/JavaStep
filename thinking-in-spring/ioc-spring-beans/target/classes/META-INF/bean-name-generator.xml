@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 不指定 id、name，Spring 会自动生成容器唯一的 identifier -->
+    <bean class="com.yipeng.ioc.spring.beans.domain.User">
+        <property name="id" value="1"/>
+        <property name="name" value="yipengNo1"/>
+    </bean>
+
+    <bean class="com.yipeng.ioc.spring.beans.domain.User">
+        <property name="id" value="2"/>
+        <property name="name" value="yipengNo2"/>
+    </bean>
+
+
+</beans>
