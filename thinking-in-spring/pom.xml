@@ -1,18 +1,20 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
-        <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
     <groupId>com.yipeng</groupId>
     <artifactId>thinking-in-spring</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>ioc-java-beans</module>
         <module>ioc-container-overview</module>
+        <module>ioc-spring-beans</module>
     </modules>
     <name>thinking-in-spring</name>
     <packaging>pom</packaging>
 
     <properties>
         <spring.version>5.2.2.RELEASE</spring.version>
+        <lombok.version>1.18.24</lombok.version>
     </properties>
 
     <!-- 依赖管理 -->
@@ -28,9 +30,14 @@
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
+    
     <build>
         <plugins>
             <plugin>
