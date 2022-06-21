@@ -19,4 +19,17 @@ public class User {
     private Long id;
     private String name;
 
+    /**
+     * 静态工厂方法用于实例化User
+     * 可用于替换构造器方法
+     *
+     * @return User
+     */
+    public static User createUser() {
+        User user = new User();
+        user.setId(1L);
+        user.setName("yipeng");
+        return user;
+    }
+
 }

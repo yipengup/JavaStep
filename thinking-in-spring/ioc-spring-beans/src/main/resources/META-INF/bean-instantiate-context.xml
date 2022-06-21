@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>Bean 实例化的几种方式</description>
+
+    <!-- 1、通过类的构造器方式实例化 -->
+    <bean id="instantiateUserByConstruct" class="com.yipeng.ioc.spring.beans.domain.User">
+        <property name="id" value="1"/>
+        <property name="name" value="yipeng"/>
+    </bean>
+
+    <!-- 2、通过静态工厂方法，该静态方法一般在 class 指定的类中用于与构造器方法替换使用 -->
+    <bean id="instantiateUserByStaticMethod" class="com.yipeng.ioc.spring.beans.domain.User"
+          factory-method="createUser"/>
+
+    <!-- 3、通过工厂方法实例化 -->
+    <bean id="instantiateUserByFactoryMethod" class="com.yipeng.ioc.spring.beans.domain.User" factory-bean="userFactory"
+          factory-method="createUser"/>
+    <bean id="userFactory" class="com.yipeng.ioc.spring.beans.factory.DefaultUserFactory"/>
+
+    <!-- 4、通过 FactoryBean 实例化 -->
+    <bean id="instantiateUserByFactoryBean" class="com.yipeng.ioc.spring.beans.factory.UserFactoryBean"/>
+
+
+</beans>
