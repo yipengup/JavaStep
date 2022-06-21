@@ -1,4 +1,4 @@
-package com.yipeng.ioc.spring.beans.definition;
+package com.yipeng.ioc.spring.beans.name.generator;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -8,11 +8,16 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
  * 当没有指明 Bean 的 identifier 时，Spring 会自动为 Bean 生成相对于 BeanFactory 唯一的 BeanName
  * <p>
  * 默认会使用  {@link org.springframework.beans.factory.support.DefaultBeanNameGenerator}
- * 采用注解的话就会使用 {@link org.springframework.context.annotation.AnnotationBeanNameGenerator}
+ * 采用 {@link org.springframework.stereotype.Component} 以及其派生注解的话就会使用 {@link org.springframework.context.annotation.AnnotationBeanNameGenerator}
+ * <p>
+ * note: 如果使用 AnnotationBeanNameGenerator 的话，对于注解对应的 Bean，如果注解没有添加 value 相关属性设置 BeanName,
+ * 那么多个不同 packageName 但是 className 会生成相同的 BeanName（会直接获取到 ClassName 然后首字母小写）
+ * 对于 BeanFactory 来说 BeanName 需要具备唯一性，此时根据不同的 BeanFactory 实现，有不同的处理逻辑。
+ * {@link DefaultListableBeanFactory#allowBeanDefinitionOverriding} 为 true 的话，表示允许被覆盖，后面的 Bean 会覆盖前面的 Bean，否则抛出异常
  *
  * @author yipeng
  */
-public class BeanNameGeneratorDemo {
+public class DefaultBeanNameGeneratorDemo {
 
     public static void main(String[] args) {
 
