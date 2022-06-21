@@ -25,7 +25,7 @@ public class DefaultBeanNameGeneratorDemo {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
         // 定义解释 XML 资源文件的类 XmlBeanDefinitionReader 用于构建 Bean 的元信息
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
-        String location = "classpath:/META-INF/bean-name-generator.xml";
+        String location = "classpath:/META-INF/bean-name-generator-context.xml";
         int loadBeanDefinitionsCount = reader.loadBeanDefinitions(location);
         System.out.println("XML 加载的 BeanDefinition 个数 loadBeanDefinitionsCount = " + loadBeanDefinitionsCount);
 
