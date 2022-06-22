@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>特殊的方式去实例化 Bean</description>
+
+    <!-- 1、结合 ServiceLoader + FactoryBean 的方式去实例化Bean -->
+    <bean id="instantiateUserByServiceLoaderFactoryBean"
+          class="org.springframework.beans.factory.serviceloader.ServiceLoaderFactoryBean">
+        <!-- note: 这里指定的是 ServiceLoader 实例化的 Bean 的信息，而不是 BeanFactory，FactoryBean 获取到对象是 ServiceLoader -->
+        <property name="serviceType" value="com.yipeng.ioc.spring.beans.factory.UserFactory"/>
+    </bean>
+
+
+</beans>
