@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>分层容器示例</description>
+
+    <!-- id 与子容器保持一致，查看最后输出的是哪一个 -->
+    <bean id="user" class="com.yipeng.common.domain.User">
+        <property name="id" value="1"/>
+        <property name="name" value="parentBeanFactoryUser"/>
+    </bean>
+
+</beans>
