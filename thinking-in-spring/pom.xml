@@ -10,6 +10,7 @@
         <module>ioc-spring-beans</module>
         <module>dependency-lookup</module>
         <module>common</module>
+        <module>dependency-inject</module>
     </modules>
     <name>thinking-in-spring</name>
     <packaging>pom</packaging>

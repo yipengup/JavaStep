@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>根据 Bean 的名称自动注入</description>
+
+    <!-- 演示 byName 的方式进行自动注入 -->
+    <!-- 这里设置属性的方式是利用 Setting 方法进行注入 -->
+    <!-- 如果有属性名称对应 Bean 的 id 一致，那么该属性就会被注入 -->
+    <!-- note：属性的类型不能是简单的类型，否则不会触发自动注入 -->
+    <bean id="userByName" class="com.yipeng.dependency.inject.domain.User" autowire="byName">
+        <property name="id" value="1"/>
+    </bean>
+
+    <!-- 这里 Bean 的 id 刚好是 [name]，此时 userByName 的 [name] 属性会自动与该 Bean 进行绑定-->
+    <!-- note：Bean 的类型要与自动注入的 classType 保持一致 -->
+    <bean id="name" class="com.yipeng.dependency.inject.domain.Name">
+        <property name="name" value="yipeng"/>
+    </bean>
+
+
+</beans>

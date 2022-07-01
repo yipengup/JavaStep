@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>按照类型自动注入示例</description>
+
+    <!-- 按照类型自动注入：会根据属性的类型查找是否有对应的 Bean -->
+    <!-- note：自动注入对应的属性不能是简单类型 -->
+    <!-- 自动注入如果发现多个符合条件的 Bean，抛出 NoUniqueBeanDefinitionException，此时可通过给 Bean 添加 Primary 属性即可-->
+    <bean id="userByType" class="com.yipeng.dependency.inject.domain.User" autowire="byType">
+        <property name="id" value="1"/>
+    </bean>
+
+    <bean id="name" class="com.yipeng.dependency.inject.domain.Name" primary="true">
+        <property name="name" value="AutowiringByType"/>
+    </bean>
+
+    <!-- 混淆类型，看是否自动注入时报错 -->
+    <bean id="mixName" class="com.yipeng.dependency.inject.domain.Name">
+        <property name="name" value="mixName"/>
+    </bean>
+
+
+</beans>

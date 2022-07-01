@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>构造器注入</description>
+
+    <!-- 构造器自动注入中，先根据属性的属性名查找 Bean，如果没有找到再通过属性的类型去查找 Bean -->
+    <bean id="autowireConstruct" class="com.yipeng.dependency.inject.domain.AutowireConstructor"
+          autowire="constructor"/>
+
+    <!-- 模拟 Bean 的 id 与属性的名称保持一致 -->
+    <!-- <bean id="name" class="com.yipeng.dependency.inject.domain.Name"> -->
+    <!--     <property name="name" value="idName"/> -->
+    <!-- </bean> -->
+
+    <!-- 模拟 Bean 的类型与属性的类的类型保持一致 -->
+    <bean id="nameType" class="com.yipeng.dependency.inject.domain.Name">
+        <property name="name" value="typeName"/>
+    </bean>
+
+</beans>

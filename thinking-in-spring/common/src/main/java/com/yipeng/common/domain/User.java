@@ -1,9 +1,5 @@
 package com.yipeng.common.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -11,10 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @author yipeng
  */
-@Getter
-@Setter
 @ToString
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class User {
 
     private static final AtomicLong ID_GENERATOR = new AtomicLong();
@@ -33,4 +26,25 @@ public class User {
         user.setName(name);
         return user;
     }
+
+    public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
+
+
