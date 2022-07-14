@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="non-bean-properties-holder" class="com.yipeng.dependency.inject.domain.NonBeanPropertiesHolder">
+        <!-- String -> int -->
+        <property name="id" value="1"/>
+        <property name="name" value="non-bean-properties-holder"/>
+
+        <!-- String -> enum -->
+        <property name="city" value="BEIJING"/>
+
+        <!-- String -> Resource -->
+        <property name="configLocation" value="classpath:META-INF/non-bean-property-injector-context.xml"/>
+    </bean>
+
+</beans>
