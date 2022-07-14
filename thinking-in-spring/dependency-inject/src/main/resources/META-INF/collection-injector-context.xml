@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>集合类型注入</description>
+
+    <bean id="collectionInjector" class="com.yipeng.dependency.inject.domain.CollectionHolder">
+        <!-- 对于数组、集合属性的注入
+            1、 可以用单个字符串以逗号分割的形式进行注入
+            2、 也可以用 list 标签的形式注入
+         -->
+        <property name="workCity" value="SHANGHAI,BEIJING"/>
+        <!-- <property name="lifeCity" value="WUHAN,BEIJING"/> -->
+        <property name="lifeCity">
+            <list>
+                <value>BEIJING</value>
+                <value>WUHAN</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
