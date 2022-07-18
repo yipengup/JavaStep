@@ -8,10 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 /**
  * 利用 {@link org.springframework.context.annotation.Bean} 注解进行依赖注入示例
- * <p>
- * 总结：(Spring 的自动装配)不管是构造器参数注入、方法参数注入、属性注入，利用
- * {@link org.springframework.beans.factory.annotation.Autowired} 、{@link Bean}
- * 进行依赖注入的时候，都是先按照名称进行依赖查找，若是没有找到，再按照类型进行依赖查找
+ * 自动注入的规则 {@link com.yipeng.dependency.inject.field.FieldInjectDemo}
  *
  * @author yipeng
  */
@@ -29,7 +26,7 @@ public class BeanInjectionDemo {
         return User.createUser("userParam");
     }
 
-    // 查看对于 {@Bean} 注入的 Bean 中对应的方法参数中查找依赖的方法：是按照参数名称查找还是按照方法参数查找
+    // 查看对于 {@Bean} 注入的 Bean 中对应的方法参数中查找依赖的方法，符合自动注入的规则
     // 方法即使是非 public 也能被识别
     @Bean
     private UserHolder userHolder(User userParam) {

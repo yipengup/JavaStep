@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- 通过 XML 文件注入一个 User 对象， 查看 AbstractBeanDefinition#factoryBeanName 是什么 -->
+    <bean id="userByXML" class="com.yipeng.common.domain.User">
+        <property name="id" value="1"/>
+        <property name="name" value="userByXML"/>
+    </bean>
+
+</beans>
