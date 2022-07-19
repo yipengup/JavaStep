@@ -17,7 +17,7 @@ import java.util.Map;
  * 字段注入只提供手动通过注解的方式注入，可用的注解有：
  * {@link org.springframework.beans.factory.annotation.Autowired}
  * {@link javax.annotation.Resource}
- * {@link javax.inject.Inject} note：需要引入 JSR-330
+ * {@link javax.inject.Inject} note：需要引入 JSR-303
  * <p>
  * note:
  * XML 装配的 Bean 最后是 {@link GenericBeanDefinition}，默认不会设置 {@link GenericBeanDefinition#factoryBeanName}
@@ -51,13 +51,6 @@ public class FieldInjectDemo {
     // @Resource 只能通过名称进行依赖查找后注入
     // @Resource(name = "user")
     // private User user1;
-
-
-    // @Bean
-    // @Primary
-    // public User userPrimary() {
-    //     return User.createUser("userByPrimary");
-    // }
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
