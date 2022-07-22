@@ -11,6 +11,7 @@
         <module>dependency-lookup</module>
         <module>common</module>
         <module>dependency-inject</module>
+        <module>dependenct-source</module>
     </modules>
     <name>thinking-in-spring</name>
     <packaging>pom</packaging>
